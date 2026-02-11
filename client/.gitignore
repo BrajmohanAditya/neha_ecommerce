@@ -1,0 +1,33 @@
+# Node modules
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Vite cache
+.vite/
+.cache/
+
+# Local env files
+.env
+.env.*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+
+# Coverage
+coverage/
+
+# Misc
+.parcel-cache/
