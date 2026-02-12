@@ -49,6 +49,8 @@ function App() {
             ></CheckAuth>
           }
         />
+
+        
         <Route
           path="/auth"
           element={
@@ -60,6 +62,8 @@ function App() {
           <Route path="login" element={<AuthLogin />} />
           <Route path="register" element={<AuthRegister />} />
         </Route>
+
+
         <Route
           path="/admin"
           element={
