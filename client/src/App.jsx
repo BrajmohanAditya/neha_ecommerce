@@ -77,6 +77,8 @@ function App() {
           <Route path="orders" element={<AdminOrders />} />
           <Route path="features" element={<AdminFeatures />} />
         </Route>
+
+        
         <Route
           path="/shop"
           element={
