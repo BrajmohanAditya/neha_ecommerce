@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import AuthLayout from "./components/auth/layout";
 import AuthLogin from "./pages/auth/login";
 import AuthRegister from "./pages/auth/register";
@@ -25,7 +25,7 @@ import SearchProducts from "./pages/shopping-view/search";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useSelector(
-    (state) => state.auth
+    (state) => state.auth,
   );
   const dispatch = useDispatch();
 
@@ -50,7 +50,6 @@ function App() {
           }
         />
 
-        
         <Route
           path="/auth"
           element={
@@ -63,13 +62,12 @@ function App() {
           <Route path="register" element={<AuthRegister />} />
         </Route>
 
-
         <Route
           path="/admin"
           element={
-            <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+            // <CheckAuth isAuthenticated={isAuthenticated} user={user}>
               <AdminLayout />
-            </CheckAuth>
+            // {/* </CheckAuth> */}
           }
         >
           <Route path="dashboard" element={<AdminDashboard />} />
@@ -78,7 +76,6 @@ function App() {
           <Route path="features" element={<AdminFeatures />} />
         </Route>
 
-        
         <Route
           path="/shop"
           element={
