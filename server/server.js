@@ -28,9 +28,20 @@ mongoose
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Configure CORS to allow both the configured CLIENT_URL and localhost during development
+const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:5173"].filter(
+  Boolean,
+);
 app.use(
   cors({
-    origin: [process.env.CLIENT_URL || "http://localhost:5173"],
+    origin: function (origin, callback) {
+      // Allow requests with no origin (e.g., server-to-server, curl)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        return callback(null, true);
+      }
+      return callback(new Error("CORS policy: This origin is not allowed"));
+    },
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
@@ -40,7 +51,7 @@ app.use(
       "Pragma",
     ],
     credentials: true,
-  })
+  }),
 );
 
 app.use(cookieParser());
