@@ -69,4 +69,23 @@ app.use("/api/shop/review", shopReviewRouter);
 
 app.use("/api/common/feature", commonFeatureRouter);
 
-app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));
+// Start server and handle EADDRINUSE by attempting a fallback port
+function startServer(port) {
+  const server = app.listen(port, () =>
+    console.log(`Server is now running on port ${port}`),
+  );
+
+  server.on("error", (err) => {
+    if (err && err.code === "EADDRINUSE") {
+      console.warn(`Port ${port} in use, trying port ${port + 1}...`);
+      setTimeout(() => startServer(port + 1), 500);
+    } else {
+      console.error("Server error:", err);
+      process.exit(1);
+    }
+  });
+
+  return server;
+}
+
+startServer(PORT);
