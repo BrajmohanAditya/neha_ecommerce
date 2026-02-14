@@ -18,8 +18,10 @@ function AuthLogin() {
 
   function onSubmit(event) {
     event.preventDefault();
+    console.log("Submitting Login Form...", formData);
 
     dispatch(loginUser(formData)).then((data) => {
+      console.log("Login Dispatch Result:", data);
       if (data?.payload?.success) {
         toast({
           title: data?.payload?.message,

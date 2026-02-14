@@ -5,6 +5,8 @@ const api = axios.create({
     withCredentials: true,
 });
 
+console.log("Axios Initialized with BaseURL:", import.meta.env.VITE_API_URL);
+
 api.interceptors.request.use(
     (config) => {
         const token = JSON.parse(sessionStorage.getItem("token"));
