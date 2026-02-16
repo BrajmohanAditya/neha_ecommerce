@@ -31,6 +31,12 @@ function ProductImageUpload({
 
   function handleDragOver(event) {
     event.preventDefault();
+    // indicate copy action to the browser
+    try {
+      event.dataTransfer.dropEffect = "copy";
+    } catch (e) {
+      // ignore if not available
+    }
   }
 
   function handleDrop(event) {
@@ -50,14 +56,19 @@ function ProductImageUpload({
     setImageLoadingState(true);
     const data = new FormData();
     data.append("my_file", imageFile);
-    const response = await api.post(
-      "/admin/products/upload-image",
-      data
-    );
-    console.log(response, "response");
-
-    if (response?.data?.success) {
-      setUploadedImageUrl(response.data.result.url);
+    try {
+      const response = await api.post("/admin/products/upload-image", data);
+      console.log(response, "response");
+      if (response?.data?.success) {
+        setUploadedImageUrl(response.data.result.url);
+      } else {
+        // upload failed on server
+        console.error("Image upload failed", response?.data);
+      }
+    } catch (err) {
+      console.error("Error uploading image:", err);
+    } finally {
+      // ensure loading state is cleared so UI doesn't get stuck
       setImageLoadingState(false);
     }
   }
@@ -74,8 +85,9 @@ function ProductImageUpload({
       <div
         onDragOver={handleDragOver}
         onDrop={handleDrop}
-        className={`${isEditMode ? "opacity-60" : ""
-          } border-2 border-dashed rounded-lg p-4`}
+        className={`${
+          isEditMode ? "opacity-60" : ""
+        } border-2 border-dashed rounded-lg p-4`}
       >
         <Input
           id="image-upload"
@@ -88,8 +100,9 @@ function ProductImageUpload({
         {!imageFile ? (
           <Label
             htmlFor="image-upload"
-            className={`${isEditMode ? "cursor-not-allowed" : ""
-              } flex flex-col items-center justify-center h-32 cursor-pointer`}
+            className={`${
+              isEditMode ? "cursor-not-allowed" : ""
+            } flex flex-col items-center justify-center h-32 cursor-pointer`}
           >
             <UploadCloudIcon className="w-10 h-10 text-muted-foreground mb-2" />
             <span>Drag & drop or click to upload image</span>
