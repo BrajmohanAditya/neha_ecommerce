@@ -9,8 +9,8 @@ const getAllOrdersOfAllUsers = async (req, res) => {
         success: false,
         message: "No orders found!",
       });
-    }
-
+    } 
+ 
     res.status(200).json({
       success: true,
       data: orders,
