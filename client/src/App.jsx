@@ -35,7 +35,6 @@ function App() {
 
   if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
 
-  console.log(isLoading, user);
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
@@ -49,7 +48,8 @@ function App() {
             ></CheckAuth>
           }
         />
-
+        
+        {/* Login and registration routes */}
         <Route
           path="/auth"
           element={
@@ -62,6 +62,7 @@ function App() {
           <Route path="register" element={<AuthRegister />} />
         </Route>
 
+        {/* Admin routes */}
         <Route
           path="/admin"
           element={
@@ -75,7 +76,7 @@ function App() {
           <Route path="orders" element={<AdminOrders />} />
           <Route path="features" element={<AdminFeatures />} />
         </Route>
-
+        {/* Shopping routes */}
         <Route
           path="/shop"
           element={

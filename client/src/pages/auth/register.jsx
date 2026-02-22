@@ -17,7 +17,6 @@ function AuthRegister() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { toast } = useToast();
-
   function onSubmit(event) {
     event.preventDefault();
     dispatch(registerUser(formData)).then((data) => {
@@ -35,7 +34,6 @@ function AuthRegister() {
     });
   }
 
-  console.log(formData);
 
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
