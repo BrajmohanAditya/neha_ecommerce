@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import authBg from "../../assets/authBg.png";
+import authBg from "../../assets/authBg.jpg";
 
 function AuthLayout() {
   return (

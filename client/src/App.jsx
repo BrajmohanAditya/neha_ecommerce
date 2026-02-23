@@ -35,7 +35,6 @@ function App() {
 
   if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
 
-
   return (
     <div className="flex flex-col overflow-hidden bg-white">
       <Routes>
@@ -48,7 +47,7 @@ function App() {
             ></CheckAuth>
           }
         />
-        
+
         {/* Login and registration routes */}
         <Route
           path="/auth"
@@ -66,9 +65,9 @@ function App() {
         <Route
           path="/admin"
           element={
-             <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+            <CheckAuth isAuthenticated={isAuthenticated} user={user}>
               <AdminLayout />
-             </CheckAuth> 
+            </CheckAuth>
           }
         >
           <Route path="dashboard" element={<AdminDashboard />} />
