@@ -3,8 +3,7 @@ import { Navigate, useLocation } from "react-router-dom";
 function CheckAuth({ isAuthenticated, user, children }) {
   const location = useLocation();
 
-
-  if(location.pathname === "/") {
+  if (location.pathname === "/") {
     if (!isAuthenticated) {
       return <Navigate to="/auth/login" />;
     } else {
@@ -16,6 +15,7 @@ function CheckAuth({ isAuthenticated, user, children }) {
     }
   }
 
+  /* Agar user login nahi hai Aur wo login ya register page par bhi nahi hai To usko zabardasti login page bhej do.*/
   if (
     !isAuthenticated &&
     !(
@@ -38,6 +38,8 @@ function CheckAuth({ isAuthenticated, user, children }) {
     }
   }
 
+  
+  /* Agar user login hai Lekin admin nahi hai Aur wo admin page kholne ki koshish kar raha hai To usko unauthorized page bhej do.*/
   if (
     isAuthenticated &&
     user?.role !== "admin" &&
