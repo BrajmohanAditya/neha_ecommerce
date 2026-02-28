@@ -22,7 +22,6 @@ function CommonForm({
   function renderInputsByComponentType(getControlItem) {
     let element = null;
     const value = formData[getControlItem.name] || "";
-
     switch (getControlItem.componentType) {
       case "input":
         element = // rendering input component
